@@ -5,7 +5,18 @@
         <h1>{{ symbol }}</h1>
         <ul>
             {% for contract in symbol.contracts.all %}
-                <li>Entry Price: {{ contract.entry_price }} | Market Price: {{ contract.market_price }} | PNL: {{ contract.pnl_percentage }}</li>
+                <li>Entry Price: {{ contract.entry_price }}</li>
+                <li>Leverage: {{ contract.leverage}}</li>
+                <li>Market Price: {{ contract.market_price }}</li>
+                <li>
+                {% if contract.pnl_percentage >= 0 %}
+                <h6 style="color: green;">PnL: {{ contract.pnl_percentage }} |</h6>
+                {% elif  contract.pnl_percentage < 0 %}
+                <h6 style="color: red;">PnL: {{ contract.pnl_percentage }} |</h6>
+                {% endif %}
+                </li>
+
+              ---------------------------------------------------
             {% endfor %}
         </ul>
     {% endfor %}

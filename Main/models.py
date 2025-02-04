@@ -10,7 +10,7 @@ class CryptoCoins(models.Model):
 class Contract(models.Model):
     crypto_coin = models.ForeignKey(CryptoCoins, on_delete=models.CASCADE, null=True, related_name='contracts')
     entry_price = models.FloatField()
-    market_price = models.FloatField()
+    market_price = models.FloatField(blank=True)
     leverage = models.FloatField()
     created_at = models.DateTimeField(auto_now_add= True)
     status = models.BooleanField(default= True)
