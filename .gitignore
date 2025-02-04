@@ -1,0 +1,21 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django specific
+*.log
+*.pot
+*.pyc
+local_settings.py
+db.sqlite3
+
+# Virtual environment folders
+.env
+.venv
+env/
+venv/
+
+# IDE / Editor folders and files
+.vscode/
+.idea/

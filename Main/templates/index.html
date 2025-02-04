@@ -1,0 +1,15 @@
+{% include 'includes/navbar.html'%}
+
+
+{% for symbol in crypto_symbol %}
+        <h1>{{ symbol }}</h1>
+        <ul>
+            {% for contract in symbol.contracts.all %}
+                <li>Entry Price: {{ contract.entry_price }} | Market Price: {{ contract.market_price }} | PNL: {{ contract.pnl_percentage }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    <h1></h1>
+
+
+{% include 'includes/footer.html'%}
