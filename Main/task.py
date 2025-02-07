@@ -11,7 +11,6 @@ def get_binance_price(symbol):
         return None
 
 def update_prices_for_active_contracts():
-    """Update market_price for all active contracts (status=True)."""
     active_contracts = Contract.objects.filter(status=True)
     for contract in active_contracts:
         market_price = get_binance_price(contract.crypto_coin.crypto_symbol)

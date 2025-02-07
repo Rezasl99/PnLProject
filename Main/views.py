@@ -4,7 +4,7 @@ from .models import CryptoCoins, Contract
 from .constants import COINS_LIST
 
 def home(request):
-    """Displays all the Contracts sorted by coins, without updating prices."""
+    """Displays all the Contracts sorted by coins"""
     crypto_symbols = CryptoCoins.objects.all()
     context = {
         'crypto_symbols': crypto_symbols,
@@ -12,7 +12,7 @@ def home(request):
     return render(request, 'index.html', context)
 
 def all_contracts(request):
-    """Displays all the contracts, without updating prices."""
+    """Displays all the contracts"""
     contracts = Contract.objects.all().order_by('-status')
     context = {'contracts': contracts}
     return render(request, 'all_contracts.html', context)
