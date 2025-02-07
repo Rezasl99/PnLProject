@@ -1,0 +1,57 @@
+{% include 'includes/navbar.html' %}
+
+
+{% for contract in  contracts %}
+
+    {% if contract.status == True %}
+    <div class="container mt-1">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-2 m-3"><h5>{{contract.crypto_coin.crypto_symbol}}
+
+                    {% if contract.is_short %}
+                        <h6>(short)</h6>
+                    {% endif %}
+
+                </h5></div>
+                <div class="col-md-2 mt-3"><h6>Entry Price: {{ contract.entry_price }}</h6></div>
+                <div class="col-md-2 mt-3"><h6>{{ contract.market_price }}</h6></div>
+                <div class="col-md-2 mt-3"><h6>Leverage: {{ contract.leverage}}</h6></div>
+
+                {% if contract.pnl_percentage >= 0 %}
+                <div class="col-md-2 mt-3" style="color: green;"><h6>PnL: {{ contract.pnl_percentage }}</h6></div>
+                <div class="col-md-1 m-2"><a  href="{% url 'close_contract' contract.id %}" type="button" class="btn btn-success">Close</a></div>
+                {% elif  contract.pnl_percentage < 0 %}
+                <div class="col-md-2 mt-3" style="color: red;"><h6>PnL: {{ contract.pnl_percentage }}</h6></div>
+                <div class="col-md-1 m-2"><a  href="{% url 'close_contract' contract.id %}" type="button" class="btn btn-danger">Close</a></div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+    {% elif contract.status == False %}
+    <div class="container mt-1">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-2 m-3"><h5>{{contract.crypto_coin.crypto_symbol}} (Closed)</h5></div>
+                <div class="col-md-2 mt-3"><h6>Entry Price: {{ contract.entry_price }}</h6></div>
+                <div class="col-md-2 mt-3"><h6>{{ contract.market_price }}</h6></div>
+                <div class="col-md-2 mt-3"><h6>Leverage: {{ contract.leverage}}</h6></div>
+
+                {% if contract.pnl_percentage >= 0 %}
+                <div class="col-md-2 mt-3" style="color: green;"><h6>PnL: {{ contract.pnl_percentage }}</h6></div>
+                {% elif  contract.pnl_percentage < 0 %}
+                <div class="col-md-2 mt-3" style="color: red;"><h6>PnL: {{ contract.pnl_percentage }}</h6></div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+{% endfor %}
+
+
+
+{% include 'includes/footer.html' %}

@@ -1,26 +1,33 @@
 {% include 'includes/navbar.html'%}
 
 
-{% for symbol in crypto_symbol %}
-        <h1>{{ symbol }}</h1>
-        <ul>
+{% for symbol in crypto_symbols %}
+<div class="container">
+<div class="accordion m-3" id="accordion-{{ symbol.id }}">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading-{{ symbol.id }}">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ symbol.id }}">
+            {{symbol}}
+        </button>
+      </h2>
+      <div id="collapse-{{ symbol.id }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ symbol.id }}" data-bs-parent="#accordion-{{ symbol.id }}">
+        <div class="accordion-body">
             {% for contract in symbol.contracts.all %}
                 <li>Entry Price: {{ contract.entry_price }}</li>
                 <li>Leverage: {{ contract.leverage}}</li>
                 <li>Market Price: {{ contract.market_price }}</li>
                 <li>
                 {% if contract.pnl_percentage >= 0 %}
-                <h6 style="color: green;">PnL: {{ contract.pnl_percentage }} |</h6>
+                <h6 style="color: green;">PnL: {{ contract.pnl_percentage }} </h6>
                 {% elif  contract.pnl_percentage < 0 %}
-                <h6 style="color: red;">PnL: {{ contract.pnl_percentage }} |</h6>
+                <h6 style="color: red;">PnL: {{ contract.pnl_percentage }} </h6>
                 {% endif %}
                 </li>
-
-              ---------------------------------------------------
             {% endfor %}
-        </ul>
-    {% endfor %}
-    <h1></h1>
-
-
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
 {% include 'includes/footer.html'%}

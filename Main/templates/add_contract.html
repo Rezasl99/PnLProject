@@ -1,0 +1,40 @@
+{% include 'includes/navbar.html'%}
+
+<div class="container mt-5">
+    <!-- Center the row -->
+    <div class="row justify-content-center">
+        <!-- Limit form width with a column -->
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Add New Contract</h2>
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="crypto_coin" class="form-label">Crypto Symbol:</label>
+                    <input list="coins" name="crypto_coin" id="crypto_coin" class="form-control" required>
+                    <datalist id="coins">
+                        {% for symbol in coins_list %}
+                        <option value="{{ symbol }}"></option>
+                        {% endfor %}
+                    </datalist>
+                </div>
+
+                <div class="mb-3">
+                    <label for="entry_point" class="form-label">Entry Price:</label>
+                    <input name="entry_point" id="entry_point" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="leverage" class="form-label">Leverage:</label>
+                    <input type="number" name="leverage" id="leverage" class="form-control" required>
+                </div>
+
+                <button type="submit" name="position" value="False" class="btn btn-success me-2">Add Long Contract</button>
+
+            <button type="submit" name="position" value="True" class="btn btn-danger">Add Short Contract</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% include 'includes/footer.html'%}
