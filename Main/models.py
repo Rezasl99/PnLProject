@@ -13,6 +13,7 @@ class Contract(models.Model):
     market_price = models.FloatField(blank=True)
     leverage = models.FloatField()
     created_at = models.DateTimeField(auto_now_add= True)
+    description = models.TextField(blank=True)
     status = models.BooleanField(default= True)
 
 
